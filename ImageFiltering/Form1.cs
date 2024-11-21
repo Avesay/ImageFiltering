@@ -1,8 +1,10 @@
+using System.Drawing.Imaging;
+
 namespace ImageFiltering
 {
     public partial class Form1 : Form
     {
-        Color[,] pixelColors;
+        //Color[,] pixelColors;
         public Form1()
         {
             InitializeComponent();
@@ -29,12 +31,23 @@ namespace ImageFiltering
             if (File.Exists(filepath))
             {
                 Bitmap bitmap = new Bitmap(filepath);
-                /*var scale1 = (float)Canvas.Size.Width / (float)bitmap.Size.Width;
-                var scale2 = (float)Canvas.Size.Height / (float)bitmap.Size.Height;
-                scale1 = Math.Max(scale1, scale2);
-                if(scale1 < 1) scale1 = 1;*/
-                Canvas.Image = bitmap;//new Bitmap(bitmap, new Size((int)(bitmap.Size.Width * scale1), (int)(bitmap.Size.Height * scale1)));
+                Bitmap clone = new Bitmap(bitmap.Width, bitmap.Height,
+                                    System.Drawing.Imaging.PixelFormat.Format32bppPArgb);
+
+                using (Graphics gr = Graphics.FromImage(clone))
+                {
+                    gr.DrawImage(bitmap, new Rectangle(0, 0, clone.Width, clone.Height));
+                }
+                Canvas.Image = clone;
+                LoadColorHistograms(clone);
             }
+        }
+        private void LoadColorHistograms(Bitmap bitmap)
+        {
+            Histogram histogram = new Histogram(bitmap);
+            ChartTable.Controls.Add(histogram.GetRedChart());
+            ChartTable.Controls.Add(histogram.GetGreenChart());
+            ChartTable.Controls.Add(histogram.GetBlueChart());
         }
 
         private void radioButtonCustom_CheckedChanged(object sender, EventArgs e)

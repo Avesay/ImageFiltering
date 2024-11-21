@@ -98,7 +98,7 @@
             groupBoxArea.Controls.Add(trackBarBrushSize);
             groupBoxArea.Controls.Add(radioButtonBrush);
             groupBoxArea.Controls.Add(radioButtonWholePicture);
-            groupBoxArea.Location = new Point(967, 31);
+            groupBoxArea.Location = new Point(977, 31);
             groupBoxArea.Name = "groupBoxArea";
             groupBoxArea.Size = new Size(276, 185);
             groupBoxArea.TabIndex = 1;
@@ -161,7 +161,7 @@
             menuStrip.Items.AddRange(new ToolStripItem[] { plikToolStripMenuItem });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
-            menuStrip.Size = new Size(1251, 28);
+            menuStrip.Size = new Size(1261, 28);
             menuStrip.TabIndex = 2;
             menuStrip.Text = "menuStrip1";
             // 
@@ -195,7 +195,7 @@
             groupBoxFilter.Controls.Add(radioButtonSharpen);
             groupBoxFilter.Controls.Add(radioButtonBlur);
             groupBoxFilter.Controls.Add(radioButtonIdentity);
-            groupBoxFilter.Location = new Point(967, 222);
+            groupBoxFilter.Location = new Point(977, 222);
             groupBoxFilter.Name = "groupBoxFilter";
             groupBoxFilter.Size = new Size(276, 415);
             groupBoxFilter.TabIndex = 3;
@@ -397,7 +397,7 @@
             // buttonApply
             // 
             buttonApply.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonApply.Location = new Point(967, 643);
+            buttonApply.Location = new Point(977, 643);
             buttonApply.Name = "buttonApply";
             buttonApply.Size = new Size(276, 29);
             buttonApply.TabIndex = 15;
@@ -409,13 +409,13 @@
             ChartTable.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             ChartTable.ColumnCount = 1;
             ChartTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            ChartTable.Location = new Point(671, 31);
+            ChartTable.Location = new Point(700, 31);
             ChartTable.Name = "ChartTable";
             ChartTable.RowCount = 3;
             ChartTable.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33F));
             ChartTable.RowStyles.Add(new RowStyle(SizeType.Percent, 33.33F));
             ChartTable.RowStyles.Add(new RowStyle(SizeType.Percent, 33.34F));
-            ChartTable.Size = new Size(290, 648);
+            ChartTable.Size = new Size(271, 648);
             ChartTable.TabIndex = 16;
             // 
             // panel1
@@ -425,14 +425,14 @@
             panel1.Controls.Add(Canvas);
             panel1.Location = new Point(0, 31);
             panel1.Name = "panel1";
-            panel1.Size = new Size(665, 648);
+            panel1.Size = new Size(694, 648);
             panel1.TabIndex = 17;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1251, 679);
+            ClientSize = new Size(1261, 679);
             Controls.Add(panel1);
             Controls.Add(ChartTable);
             Controls.Add(buttonApply);
