@@ -32,7 +32,6 @@
             groupBoxArea = new GroupBox();
             BrushSizeVal = new Label();
             buttonClear = new Button();
-            radioButtonPolygon = new RadioButton();
             trackBarBrushSize = new TrackBar();
             radioButtonBrush = new RadioButton();
             radioButtonWholePicture = new RadioButton();
@@ -44,15 +43,15 @@
             labelPrzesuniecie = new Label();
             numericUpDownShift = new NumericUpDown();
             numericUpDownDivisor = new NumericUpDown();
-            numericUpDown9 = new NumericUpDown();
-            numericUpDown8 = new NumericUpDown();
-            numericUpDown7 = new NumericUpDown();
-            numericUpDown6 = new NumericUpDown();
-            numericUpDown5 = new NumericUpDown();
-            numericUpDown4 = new NumericUpDown();
-            numericUpDown3 = new NumericUpDown();
-            numericUpDown2 = new NumericUpDown();
-            numericUpDown1 = new NumericUpDown();
+            numericUpDown22 = new NumericUpDown();
+            numericUpDown21 = new NumericUpDown();
+            numericUpDown20 = new NumericUpDown();
+            numericUpDown12 = new NumericUpDown();
+            numericUpDown11 = new NumericUpDown();
+            numericUpDown10 = new NumericUpDown();
+            numericUpDown02 = new NumericUpDown();
+            numericUpDown01 = new NumericUpDown();
+            numericUpDown00 = new NumericUpDown();
             radioButtonCustom = new RadioButton();
             radioButtonEdgeDetect = new RadioButton();
             radioButtonRelief = new RadioButton();
@@ -69,22 +68,21 @@
             groupBoxFilter.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownShift).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDivisor).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown9).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown7).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown6).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown5).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown4).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown3).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown22).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown21).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown20).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown12).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown11).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown10).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown02).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown01).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown00).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // Canvas
             // 
             Canvas.BackColor = SystemColors.AppWorkspace;
-            Canvas.Dock = DockStyle.Fill;
             Canvas.Location = new Point(0, 0);
             Canvas.Name = "Canvas";
             Canvas.Size = new Size(665, 648);
@@ -97,7 +95,6 @@
             groupBoxArea.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             groupBoxArea.Controls.Add(BrushSizeVal);
             groupBoxArea.Controls.Add(buttonClear);
-            groupBoxArea.Controls.Add(radioButtonPolygon);
             groupBoxArea.Controls.Add(trackBarBrushSize);
             groupBoxArea.Controls.Add(radioButtonBrush);
             groupBoxArea.Controls.Add(radioButtonWholePicture);
@@ -126,23 +123,15 @@
             buttonClear.Text = "Wyczyść";
             buttonClear.UseVisualStyleBackColor = true;
             // 
-            // radioButtonPolygon
-            // 
-            radioButtonPolygon.AutoSize = true;
-            radioButtonPolygon.Location = new Point(3, 145);
-            radioButtonPolygon.Name = "radioButtonPolygon";
-            radioButtonPolygon.Size = new Size(89, 24);
-            radioButtonPolygon.TabIndex = 3;
-            radioButtonPolygon.TabStop = true;
-            radioButtonPolygon.Text = "Wielokąt";
-            radioButtonPolygon.UseVisualStyleBackColor = true;
-            // 
             // trackBarBrushSize
             // 
             trackBarBrushSize.Location = new Point(6, 83);
+            trackBarBrushSize.Maximum = 100;
             trackBarBrushSize.Name = "trackBarBrushSize";
             trackBarBrushSize.Size = new Size(228, 56);
             trackBarBrushSize.TabIndex = 2;
+            trackBarBrushSize.Value = 10;
+            trackBarBrushSize.Scroll += trackBarBrushSize_Scroll;
             // 
             // radioButtonBrush
             // 
@@ -191,15 +180,15 @@
             groupBoxFilter.Controls.Add(labelPrzesuniecie);
             groupBoxFilter.Controls.Add(numericUpDownShift);
             groupBoxFilter.Controls.Add(numericUpDownDivisor);
-            groupBoxFilter.Controls.Add(numericUpDown9);
-            groupBoxFilter.Controls.Add(numericUpDown8);
-            groupBoxFilter.Controls.Add(numericUpDown7);
-            groupBoxFilter.Controls.Add(numericUpDown6);
-            groupBoxFilter.Controls.Add(numericUpDown5);
-            groupBoxFilter.Controls.Add(numericUpDown4);
-            groupBoxFilter.Controls.Add(numericUpDown3);
-            groupBoxFilter.Controls.Add(numericUpDown2);
-            groupBoxFilter.Controls.Add(numericUpDown1);
+            groupBoxFilter.Controls.Add(numericUpDown22);
+            groupBoxFilter.Controls.Add(numericUpDown21);
+            groupBoxFilter.Controls.Add(numericUpDown20);
+            groupBoxFilter.Controls.Add(numericUpDown12);
+            groupBoxFilter.Controls.Add(numericUpDown11);
+            groupBoxFilter.Controls.Add(numericUpDown10);
+            groupBoxFilter.Controls.Add(numericUpDown02);
+            groupBoxFilter.Controls.Add(numericUpDown01);
+            groupBoxFilter.Controls.Add(numericUpDown00);
             groupBoxFilter.Controls.Add(radioButtonCustom);
             groupBoxFilter.Controls.Add(radioButtonEdgeDetect);
             groupBoxFilter.Controls.Add(radioButtonRelief);
@@ -216,16 +205,20 @@
             // checkBoxAutoDivisor
             // 
             checkBoxAutoDivisor.AutoSize = true;
+            checkBoxAutoDivisor.Checked = true;
+            checkBoxAutoDivisor.CheckState = CheckState.Checked;
             checkBoxAutoDivisor.Location = new Point(6, 386);
             checkBoxAutoDivisor.Name = "checkBoxAutoDivisor";
             checkBoxAutoDivisor.Size = new Size(276, 24);
             checkBoxAutoDivisor.TabIndex = 4;
             checkBoxAutoDivisor.Text = "Automatyczne wyznaczanie dzielnika";
             checkBoxAutoDivisor.UseVisualStyleBackColor = true;
+            checkBoxAutoDivisor.CheckedChanged += checkBoxAutoDivisor_CheckedChanged;
             // 
             // labelDzielnik
             // 
             labelDzielnik.AutoSize = true;
+            labelDzielnik.Enabled = false;
             labelDzielnik.Location = new Point(6, 355);
             labelDzielnik.Name = "labelDzielnik";
             labelDzielnik.Size = new Size(62, 20);
@@ -250,82 +243,93 @@
             // 
             // numericUpDownDivisor
             // 
+            numericUpDownDivisor.DecimalPlaces = 6;
+            numericUpDownDivisor.Enabled = false;
             numericUpDownDivisor.Location = new Point(111, 353);
             numericUpDownDivisor.Name = "numericUpDownDivisor";
             numericUpDownDivisor.Size = new Size(150, 27);
             numericUpDownDivisor.TabIndex = 5;
             // 
-            // numericUpDown9
+            // numericUpDown22
             // 
-            numericUpDown9.DecimalPlaces = 4;
-            numericUpDown9.Location = new Point(180, 272);
-            numericUpDown9.Name = "numericUpDown9";
-            numericUpDown9.Size = new Size(81, 27);
-            numericUpDown9.TabIndex = 13;
+            numericUpDown22.DecimalPlaces = 4;
+            numericUpDown22.Enabled = false;
+            numericUpDown22.Location = new Point(180, 272);
+            numericUpDown22.Name = "numericUpDown22";
+            numericUpDown22.Size = new Size(81, 27);
+            numericUpDown22.TabIndex = 13;
             // 
-            // numericUpDown8
+            // numericUpDown21
             // 
-            numericUpDown8.DecimalPlaces = 4;
-            numericUpDown8.Location = new Point(93, 272);
-            numericUpDown8.Name = "numericUpDown8";
-            numericUpDown8.Size = new Size(81, 27);
-            numericUpDown8.TabIndex = 12;
+            numericUpDown21.DecimalPlaces = 4;
+            numericUpDown21.Enabled = false;
+            numericUpDown21.Location = new Point(93, 272);
+            numericUpDown21.Name = "numericUpDown21";
+            numericUpDown21.Size = new Size(81, 27);
+            numericUpDown21.TabIndex = 12;
             // 
-            // numericUpDown7
+            // numericUpDown20
             // 
-            numericUpDown7.DecimalPlaces = 4;
-            numericUpDown7.Location = new Point(6, 272);
-            numericUpDown7.Name = "numericUpDown7";
-            numericUpDown7.Size = new Size(81, 27);
-            numericUpDown7.TabIndex = 11;
+            numericUpDown20.DecimalPlaces = 4;
+            numericUpDown20.Enabled = false;
+            numericUpDown20.Location = new Point(6, 272);
+            numericUpDown20.Name = "numericUpDown20";
+            numericUpDown20.Size = new Size(81, 27);
+            numericUpDown20.TabIndex = 11;
             // 
-            // numericUpDown6
+            // numericUpDown12
             // 
-            numericUpDown6.DecimalPlaces = 4;
-            numericUpDown6.Location = new Point(180, 239);
-            numericUpDown6.Name = "numericUpDown6";
-            numericUpDown6.Size = new Size(81, 27);
-            numericUpDown6.TabIndex = 10;
+            numericUpDown12.DecimalPlaces = 4;
+            numericUpDown12.Enabled = false;
+            numericUpDown12.Location = new Point(180, 239);
+            numericUpDown12.Name = "numericUpDown12";
+            numericUpDown12.Size = new Size(81, 27);
+            numericUpDown12.TabIndex = 10;
             // 
-            // numericUpDown5
+            // numericUpDown11
             // 
-            numericUpDown5.DecimalPlaces = 4;
-            numericUpDown5.Location = new Point(93, 239);
-            numericUpDown5.Name = "numericUpDown5";
-            numericUpDown5.Size = new Size(81, 27);
-            numericUpDown5.TabIndex = 9;
+            numericUpDown11.DecimalPlaces = 4;
+            numericUpDown11.Enabled = false;
+            numericUpDown11.Location = new Point(93, 239);
+            numericUpDown11.Name = "numericUpDown11";
+            numericUpDown11.Size = new Size(81, 27);
+            numericUpDown11.TabIndex = 9;
             // 
-            // numericUpDown4
+            // numericUpDown10
             // 
-            numericUpDown4.DecimalPlaces = 4;
-            numericUpDown4.Location = new Point(6, 239);
-            numericUpDown4.Name = "numericUpDown4";
-            numericUpDown4.Size = new Size(81, 27);
-            numericUpDown4.TabIndex = 8;
+            numericUpDown10.DecimalPlaces = 4;
+            numericUpDown10.Enabled = false;
+            numericUpDown10.Location = new Point(6, 239);
+            numericUpDown10.Name = "numericUpDown10";
+            numericUpDown10.Size = new Size(81, 27);
+            numericUpDown10.TabIndex = 8;
             // 
-            // numericUpDown3
+            // numericUpDown02
             // 
-            numericUpDown3.DecimalPlaces = 4;
-            numericUpDown3.Location = new Point(180, 206);
-            numericUpDown3.Name = "numericUpDown3";
-            numericUpDown3.Size = new Size(81, 27);
-            numericUpDown3.TabIndex = 7;
+            numericUpDown02.DecimalPlaces = 4;
+            numericUpDown02.Enabled = false;
+            numericUpDown02.Location = new Point(180, 206);
+            numericUpDown02.Name = "numericUpDown02";
+            numericUpDown02.Size = new Size(81, 27);
+            numericUpDown02.TabIndex = 7;
             // 
-            // numericUpDown2
+            // numericUpDown01
             // 
-            numericUpDown2.DecimalPlaces = 4;
-            numericUpDown2.Location = new Point(93, 206);
-            numericUpDown2.Name = "numericUpDown2";
-            numericUpDown2.Size = new Size(81, 27);
-            numericUpDown2.TabIndex = 6;
+            numericUpDown01.DecimalPlaces = 4;
+            numericUpDown01.Enabled = false;
+            numericUpDown01.Location = new Point(93, 206);
+            numericUpDown01.Name = "numericUpDown01";
+            numericUpDown01.Size = new Size(81, 27);
+            numericUpDown01.TabIndex = 6;
             // 
-            // numericUpDown1
+            // numericUpDown00
             // 
-            numericUpDown1.DecimalPlaces = 4;
-            numericUpDown1.Location = new Point(6, 206);
-            numericUpDown1.Name = "numericUpDown1";
-            numericUpDown1.Size = new Size(81, 27);
-            numericUpDown1.TabIndex = 4;
+            numericUpDown00.DecimalPlaces = 4;
+            numericUpDown00.Enabled = false;
+            numericUpDown00.Location = new Point(6, 206);
+            numericUpDown00.Name = "numericUpDown00";
+            numericUpDown00.Size = new Size(81, 27);
+            numericUpDown00.TabIndex = 4;
             // 
             // radioButtonCustom
             // 
@@ -334,9 +338,9 @@
             radioButtonCustom.Name = "radioButtonCustom";
             radioButtonCustom.Size = new Size(77, 24);
             radioButtonCustom.TabIndex = 5;
-            radioButtonCustom.TabStop = true;
             radioButtonCustom.Text = "Własny";
             radioButtonCustom.UseVisualStyleBackColor = true;
+            radioButtonCustom.CheckedChanged += radioButtonCustom_CheckedChanged;
             // 
             // radioButtonEdgeDetect
             // 
@@ -345,7 +349,6 @@
             radioButtonEdgeDetect.Name = "radioButtonEdgeDetect";
             radioButtonEdgeDetect.Size = new Size(174, 24);
             radioButtonEdgeDetect.TabIndex = 4;
-            radioButtonEdgeDetect.TabStop = true;
             radioButtonEdgeDetect.Text = "Wykrywanie Krawędzi";
             radioButtonEdgeDetect.UseVisualStyleBackColor = true;
             // 
@@ -356,7 +359,6 @@
             radioButtonRelief.Name = "radioButtonRelief";
             radioButtonRelief.Size = new Size(116, 24);
             radioButtonRelief.TabIndex = 3;
-            radioButtonRelief.TabStop = true;
             radioButtonRelief.Text = "Płaskorzeźba";
             radioButtonRelief.UseVisualStyleBackColor = true;
             // 
@@ -367,7 +369,6 @@
             radioButtonSharpen.Name = "radioButtonSharpen";
             radioButtonSharpen.Size = new Size(111, 24);
             radioButtonSharpen.TabIndex = 2;
-            radioButtonSharpen.TabStop = true;
             radioButtonSharpen.Text = "Wyostrzanie";
             radioButtonSharpen.UseVisualStyleBackColor = true;
             // 
@@ -378,13 +379,13 @@
             radioButtonBlur.Name = "radioButtonBlur";
             radioButtonBlur.Size = new Size(94, 24);
             radioButtonBlur.TabIndex = 1;
-            radioButtonBlur.TabStop = true;
             radioButtonBlur.Text = "Rozmycie";
             radioButtonBlur.UseVisualStyleBackColor = true;
             // 
             // radioButtonIdentity
             // 
             radioButtonIdentity.AutoSize = true;
+            radioButtonIdentity.Checked = true;
             radioButtonIdentity.Location = new Point(3, 26);
             radioButtonIdentity.Name = "radioButtonIdentity";
             radioButtonIdentity.Size = new Size(115, 24);
@@ -450,15 +451,15 @@
             groupBoxFilter.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)numericUpDownShift).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDivisor).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown9).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown7).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown6).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown5).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown4).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown3).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown22).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown21).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown20).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown12).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown11).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown10).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown02).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown01).EndInit();
+            ((System.ComponentModel.ISupportInitialize)numericUpDown00).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ResumeLayout(false);
@@ -488,15 +489,15 @@
         private Label labelPrzesuniecie;
         private NumericUpDown numericUpDownShift;
         private NumericUpDown numericUpDownDivisor;
-        private NumericUpDown numericUpDown9;
-        private NumericUpDown numericUpDown8;
-        private NumericUpDown numericUpDown7;
-        private NumericUpDown numericUpDown6;
-        private NumericUpDown numericUpDown5;
-        private NumericUpDown numericUpDown4;
-        private NumericUpDown numericUpDown3;
-        private NumericUpDown numericUpDown2;
-        private NumericUpDown numericUpDown1;
+        private NumericUpDown numericUpDown22;
+        private NumericUpDown numericUpDown21;
+        private NumericUpDown numericUpDown20;
+        private NumericUpDown numericUpDown12;
+        private NumericUpDown numericUpDown11;
+        private NumericUpDown numericUpDown10;
+        private NumericUpDown numericUpDown02;
+        private NumericUpDown numericUpDown01;
+        private NumericUpDown numericUpDown00;
         private CheckBox checkBoxAutoDivisor;
         private Button buttonApply;
         private TableLayoutPanel ChartTable;
