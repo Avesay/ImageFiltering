@@ -147,6 +147,7 @@
             // radioButtonWholePicture
             // 
             radioButtonWholePicture.AutoSize = true;
+            radioButtonWholePicture.Checked = true;
             radioButtonWholePicture.Location = new Point(3, 23);
             radioButtonWholePicture.Name = "radioButtonWholePicture";
             radioButtonWholePicture.Size = new Size(100, 24);
@@ -246,9 +247,11 @@
             numericUpDownDivisor.DecimalPlaces = 6;
             numericUpDownDivisor.Enabled = false;
             numericUpDownDivisor.Location = new Point(111, 353);
+            numericUpDownDivisor.Minimum = new decimal(new int[] { 1, 0, 0, 0 });
             numericUpDownDivisor.Name = "numericUpDownDivisor";
             numericUpDownDivisor.Size = new Size(150, 27);
             numericUpDownDivisor.TabIndex = 5;
+            numericUpDownDivisor.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // numericUpDown22
             // 
@@ -258,6 +261,7 @@
             numericUpDown22.Name = "numericUpDown22";
             numericUpDown22.Size = new Size(81, 27);
             numericUpDown22.TabIndex = 13;
+            numericUpDown22.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // numericUpDown21
             // 
@@ -267,6 +271,7 @@
             numericUpDown21.Name = "numericUpDown21";
             numericUpDown21.Size = new Size(81, 27);
             numericUpDown21.TabIndex = 12;
+            numericUpDown21.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // numericUpDown20
             // 
@@ -276,6 +281,7 @@
             numericUpDown20.Name = "numericUpDown20";
             numericUpDown20.Size = new Size(81, 27);
             numericUpDown20.TabIndex = 11;
+            numericUpDown20.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // numericUpDown12
             // 
@@ -285,6 +291,7 @@
             numericUpDown12.Name = "numericUpDown12";
             numericUpDown12.Size = new Size(81, 27);
             numericUpDown12.TabIndex = 10;
+            numericUpDown12.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // numericUpDown11
             // 
@@ -294,6 +301,7 @@
             numericUpDown11.Name = "numericUpDown11";
             numericUpDown11.Size = new Size(81, 27);
             numericUpDown11.TabIndex = 9;
+            numericUpDown11.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // numericUpDown10
             // 
@@ -303,6 +311,7 @@
             numericUpDown10.Name = "numericUpDown10";
             numericUpDown10.Size = new Size(81, 27);
             numericUpDown10.TabIndex = 8;
+            numericUpDown10.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // numericUpDown02
             // 
@@ -312,6 +321,7 @@
             numericUpDown02.Name = "numericUpDown02";
             numericUpDown02.Size = new Size(81, 27);
             numericUpDown02.TabIndex = 7;
+            numericUpDown02.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // numericUpDown01
             // 
@@ -321,6 +331,7 @@
             numericUpDown01.Name = "numericUpDown01";
             numericUpDown01.Size = new Size(81, 27);
             numericUpDown01.TabIndex = 6;
+            numericUpDown01.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // numericUpDown00
             // 
@@ -330,6 +341,7 @@
             numericUpDown00.Name = "numericUpDown00";
             numericUpDown00.Size = new Size(81, 27);
             numericUpDown00.TabIndex = 4;
+            numericUpDown00.Value = new decimal(new int[] { 1, 0, 0, 0 });
             // 
             // radioButtonCustom
             // 
@@ -351,6 +363,7 @@
             radioButtonEdgeDetect.TabIndex = 4;
             radioButtonEdgeDetect.Text = "Wykrywanie Krawędzi";
             radioButtonEdgeDetect.UseVisualStyleBackColor = true;
+            radioButtonEdgeDetect.CheckedChanged += radioButtonEdgeDetect_CheckedChanged;
             // 
             // radioButtonRelief
             // 
@@ -361,6 +374,7 @@
             radioButtonRelief.TabIndex = 3;
             radioButtonRelief.Text = "Płaskorzeźba";
             radioButtonRelief.UseVisualStyleBackColor = true;
+            radioButtonRelief.CheckedChanged += radioButtonRelief_CheckedChanged;
             // 
             // radioButtonSharpen
             // 
@@ -371,6 +385,7 @@
             radioButtonSharpen.TabIndex = 2;
             radioButtonSharpen.Text = "Wyostrzanie";
             radioButtonSharpen.UseVisualStyleBackColor = true;
+            radioButtonSharpen.CheckedChanged += radioButtonSharpen_CheckedChanged;
             // 
             // radioButtonBlur
             // 
@@ -381,6 +396,7 @@
             radioButtonBlur.TabIndex = 1;
             radioButtonBlur.Text = "Rozmycie";
             radioButtonBlur.UseVisualStyleBackColor = true;
+            radioButtonBlur.CheckedChanged += radioButtonBlur_CheckedChanged;
             // 
             // radioButtonIdentity
             // 
@@ -393,6 +409,7 @@
             radioButtonIdentity.TabStop = true;
             radioButtonIdentity.Text = "Identyczność";
             radioButtonIdentity.UseVisualStyleBackColor = true;
+            radioButtonIdentity.CheckedChanged += radioButtonIdentity_CheckedChanged;
             // 
             // buttonApply
             // 
@@ -403,6 +420,7 @@
             buttonApply.TabIndex = 15;
             buttonApply.Text = "Zastosuj";
             buttonApply.UseVisualStyleBackColor = true;
+            buttonApply.Click += buttonApply_Click;
             // 
             // ChartTable
             // 

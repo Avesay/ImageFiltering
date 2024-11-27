@@ -11,27 +11,11 @@ namespace ImageFiltering
     internal class Histogram
     {
         Color[,] pixelColors;
-        public Histogram(Bitmap bitmap)
+        public Histogram(Color[,] colors)
         {
-            pixelColors = BitmapToMatrix(bitmap);
+            pixelColors = colors;
         }
-        private static Color[,] BitmapToMatrix(Bitmap bitmap)
-        {
-            int width = bitmap.Size.Width;
-            int height = bitmap.Size.Height;
-            Color[,] colors = new Color[width,height];
-            using(FastBitmap fastbitmap = bitmap.FastLock())
-            {
-                for(int i = 0; i < width; i++)
-                {
-                    for (int j = 0; j < height; j++)
-                    {
-                        colors[i,j] = fastbitmap.GetPixel(i, j);
-                    }
-                }
-            }
-            return colors;
-        }
+        
         private Chart GetBasicHistogram()
         {
             Chart chart = new();
