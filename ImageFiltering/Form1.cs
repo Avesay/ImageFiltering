@@ -1,20 +1,26 @@
 using FastBitmapLib;
 using System.Drawing.Imaging;
+using System.Security.Cryptography;
+using static System.Windows.Forms.DataFormats;
+using System.Windows.Forms;
 
 namespace ImageFiltering
 {
     public partial class Form1 : Form
     {
-        Color[,] pixelColors;
-        float[,] M = new float[3, 3] { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
+        Color[,]? pixelColors;
+        bool[,]? colored;
+        float[,] M = new float[3, 3] { { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } };
+        int brushsize = 0;
+        string filepath = "../../../images/park.png";
 
         public Form1()
         {
             InitializeComponent();
             BrushSizeVal.Text = trackBarBrushSize.Value.ToString();
-            string filepath = "../../../images/park.png";
             LoadImage(filepath);
         }
+        #region BitmapMatrixOperations
         private Color[,] BitmapToMatrix(Bitmap bitmap)
         {
             int width = bitmap.Size.Width;
@@ -34,6 +40,7 @@ namespace ImageFiltering
         }
         private Bitmap MatrixToBitmap()
         {
+            if (pixelColors is null) return new Bitmap(Canvas.Size.Width, Canvas.Size.Height);
             int width = pixelColors.GetLength(0);
             int height = pixelColors.GetLength(1);
             Bitmap bitmap = new Bitmap(width, height);
@@ -49,21 +56,38 @@ namespace ImageFiltering
             }
             return bitmap;
         }
+        #endregion
+        #region FileOperations
         private void plikToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog ofd = new OpenFileDialog()
             {
                 Title = "Wybierz obraz",
                 Filter = "png files (*.png)|*.png",
-                InitialDirectory = "C:\\"
+                InitialDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\Images"
             };
             DialogResult result = ofd.ShowDialog();
             if (result == DialogResult.OK)
             {
-                var filepath = ofd.FileName;
+                filepath = ofd.FileName;
                 LoadImage(filepath);
             }
         }
+        private void zapiszObrazToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog()
+            {
+                Title = "Zapisz obraz",
+                Filter = "png files (*.png)|*.png",
+                InitialDirectory = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName + "\\Images"
+            };
+            DialogResult result = saveFileDialog.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                Canvas.Image.Save(saveFileDialog.FileName, ImageFormat.Png);
+            }
+        }
+        #endregion
         private void LoadImage(string filepath)
         {
             if (File.Exists(filepath))
@@ -83,6 +107,7 @@ namespace ImageFiltering
         }
         private void LoadColorHistograms()
         {
+            if (pixelColors is null) return;
             Histogram histogram = new(pixelColors);
             ChartTable.Controls.Clear();
             ChartTable.Controls.Add(histogram.GetRedChart());
@@ -109,19 +134,30 @@ namespace ImageFiltering
 
         private void buttonApply_Click(object sender, EventArgs e)
         {
-            if(radioButtonCustom.Checked) M = new float[3, 3] { 
+            if (radioButtonCustom.Checked) M = new float[3, 3] {
                 { (float)numericUpDown00.Value, (float)numericUpDown01.Value, (float)numericUpDown02.Value },
                 { (float)numericUpDown10.Value, (float) numericUpDown11.Value, (float)numericUpDown12.Value },
                 {(float)numericUpDown20.Value, (float)numericUpDown21.Value, (float)numericUpDown22.Value }
             };
             if (radioButtonWholePicture.Checked)
             {
+                //Canvas.MouseCaptureChanged -= Canvas_MouseCaptureChanged;
+                Canvas.MouseDown -= Canvas_MouseDown;
+                Canvas.MouseUp -= Canvas_MouseUp;
+                Canvas.MouseMove -= Canvas_MouseMove;
                 pixelColors = Filters.Filter.FilterColors(pixelColors, M, (from float val in M select val).Sum(), (float)numericUpDownShift.Value);
             }
+            else if (radioButtonBrush.Checked)
+            {
+                brushsize = trackBarBrushSize.Value;
+                Canvas.MouseDown += Canvas_MouseDown;
+                Canvas.MouseUp += Canvas_MouseUp;
+                Canvas.MouseMove += Canvas_MouseMove;
+            }//Canvas.MouseCaptureChanged += Canvas_MouseCaptureChanged;
             Canvas.Image = MatrixToBitmap();
             LoadColorHistograms();
         }
-
+        #region radiobuttons
         private void radioButtonBlur_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonBlur.Checked) M = new float[3, 3] { { 0, 1, 0 }, { 1, 4, 1 }, { 0, 1, 0 } };
@@ -129,7 +165,7 @@ namespace ImageFiltering
 
         private void radioButtonIdentity_CheckedChanged(object sender, EventArgs e)
         {
-            if (radioButtonIdentity.Checked) M = new float[3, 3] { { 1, 1, 1 }, { 1, 1, 1 }, { 1, 1, 1 } };
+            if (radioButtonIdentity.Checked) M = new float[3, 3] { { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } };
         }
 
         private void radioButtonSharpen_CheckedChanged(object sender, EventArgs e)
@@ -138,14 +174,62 @@ namespace ImageFiltering
         }
         private void radioButtonRelief_CheckedChanged(object sender, EventArgs e)
         {
-            if(radioButtonRelief.Checked) M = new float[3, 3] { { -1,-1,0 }, { -1,1,1 }, { 0,1,1 } };
+            if (radioButtonRelief.Checked) M = new float[3, 3] { { -1, -1, 0 }, { -1, 1, 1 }, { 0, 1, 1 } };
         }
 
         private void radioButtonEdgeDetect_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonEdgeDetect.Checked) M = new float[3, 3] { { 0, -1, 0 }, { -1, 4, -1 }, { 0, -1, 0 } };
         }
+        #endregion
 
-        
+        private bool mouseDown = false;
+        private Color[,] OGColors;
+        private void Canvas_MouseDown(object? sender, MouseEventArgs e)
+        {
+            colored = new bool[Canvas.Size.Width, Canvas.Size.Height];
+            mouseDown = true;
+            OGColors = pixelColors;
+        }
+        private int x = 0;
+        private int y = 0;
+        private void Canvas_MouseMove(object? sender, MouseEventArgs e)
+        {
+            //apply filter
+            //x = Cursor.Position.X; 
+            //y = Cursor.Position.Y;
+            x = e.X;
+            y = e.Y;
+
+            Canvas.Invalidate();
+        }
+        private void Canvas_Paint(object sender, PaintEventArgs e)
+        {
+            if (radioButtonBrush.Checked)
+            {
+                //Pen skyBluePen = new Pen(Brushes.DeepSkyBlue);
+                using (Pen p = new(Brushes.Black))
+                {
+                    e.Graphics.DrawEllipse(p, x - brushsize / 2, y - brushsize / 2, brushsize, brushsize);
+                    if (mouseDown)
+                    {
+                        pixelColors = Filters.Filter.FilterColors(pixelColors, OGColors, M, (from float val in M select val).Sum(), (float)numericUpDownShift.Value, x, y, brushsize / 2, colored); //TODO: remove this sum
+                        Canvas.Image = MatrixToBitmap();
+                    }
+                }
+            }
+
+        }
+
+        private void Canvas_MouseUp(object? sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+            LoadColorHistograms();
+        }
+
+        private void buttonClear_Click(object sender, EventArgs e)
+        {
+            LoadImage(filepath);
+        }
     }
 }

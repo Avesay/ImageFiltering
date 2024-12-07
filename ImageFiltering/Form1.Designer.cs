@@ -37,6 +37,7 @@
             radioButtonWholePicture = new RadioButton();
             menuStrip = new MenuStrip();
             plikToolStripMenuItem = new ToolStripMenuItem();
+            wybierzObrazToolStripMenuItem = new ToolStripMenuItem();
             groupBoxFilter = new GroupBox();
             checkBoxAutoDivisor = new CheckBox();
             labelDzielnik = new Label();
@@ -61,6 +62,7 @@
             buttonApply = new Button();
             ChartTable = new TableLayoutPanel();
             panel1 = new Panel();
+            zapiszObrazToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)Canvas).BeginInit();
             groupBoxArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarBrushSize).BeginInit();
@@ -89,6 +91,7 @@
             Canvas.SizeMode = PictureBoxSizeMode.AutoSize;
             Canvas.TabIndex = 0;
             Canvas.TabStop = false;
+            Canvas.Paint += Canvas_Paint;
             // 
             // groupBoxArea
             // 
@@ -122,6 +125,7 @@
             buttonClear.TabIndex = 2;
             buttonClear.Text = "Wyczyść";
             buttonClear.UseVisualStyleBackColor = true;
+            buttonClear.Click += buttonClear_Click;
             // 
             // trackBarBrushSize
             // 
@@ -168,10 +172,17 @@
             // 
             // plikToolStripMenuItem
             // 
+            plikToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { wybierzObrazToolStripMenuItem, zapiszObrazToolStripMenuItem });
             plikToolStripMenuItem.Name = "plikToolStripMenuItem";
             plikToolStripMenuItem.Size = new Size(46, 24);
             plikToolStripMenuItem.Text = "Plik";
-            plikToolStripMenuItem.Click += plikToolStripMenuItem_Click;
+            // 
+            // wybierzObrazToolStripMenuItem
+            // 
+            wybierzObrazToolStripMenuItem.Name = "wybierzObrazToolStripMenuItem";
+            wybierzObrazToolStripMenuItem.Size = new Size(224, 26);
+            wybierzObrazToolStripMenuItem.Text = "Wybierz obraz";
+            wybierzObrazToolStripMenuItem.Click += plikToolStripMenuItem_Click;
             // 
             // groupBoxFilter
             // 
@@ -446,6 +457,13 @@
             panel1.Size = new Size(694, 648);
             panel1.TabIndex = 17;
             // 
+            // zapiszObrazToolStripMenuItem
+            // 
+            zapiszObrazToolStripMenuItem.Name = "zapiszObrazToolStripMenuItem";
+            zapiszObrazToolStripMenuItem.Size = new Size(224, 26);
+            zapiszObrazToolStripMenuItem.Text = "Zapisz Obraz";
+            zapiszObrazToolStripMenuItem.Click += zapiszObrazToolStripMenuItem_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -457,6 +475,7 @@
             Controls.Add(groupBoxFilter);
             Controls.Add(groupBoxArea);
             Controls.Add(menuStrip);
+            DoubleBuffered = true;
             Name = "Form1";
             Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)Canvas).EndInit();
@@ -493,7 +512,6 @@
         private RadioButton radioButtonWholePicture;
         private Label BrushSizeVal;
         private Button buttonClear;
-        private RadioButton radioButtonPolygon;
         private MenuStrip menuStrip;
         private ToolStripMenuItem plikToolStripMenuItem;
         private GroupBox groupBoxFilter;
@@ -520,5 +538,7 @@
         private Button buttonApply;
         private TableLayoutPanel ChartTable;
         private Panel panel1;
+        private ToolStripMenuItem wybierzObrazToolStripMenuItem;
+        private ToolStripMenuItem zapiszObrazToolStripMenuItem;
     }
 }
