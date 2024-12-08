@@ -13,6 +13,7 @@ namespace ImageFiltering
         float[,] M = new float[3, 3] { { 0, 0, 0 }, { 0, 1, 0 }, { 0, 0, 0 } };
         int brushsize = 0;
         string filepath = "../../../images/park.png";
+        float D = 1;
 
         public Form1()
         {
@@ -139,13 +140,14 @@ namespace ImageFiltering
                 { (float)numericUpDown10.Value, (float) numericUpDown11.Value, (float)numericUpDown12.Value },
                 {(float)numericUpDown20.Value, (float)numericUpDown21.Value, (float)numericUpDown22.Value }
             };
+            if(!checkBoxAutoDivisor.Checked) D = (float) numericUpDownDivisor.Value;
+            else D = (from float val in M select val).Sum();
             if (radioButtonWholePicture.Checked)
             {
-                //Canvas.MouseCaptureChanged -= Canvas_MouseCaptureChanged;
                 Canvas.MouseDown -= Canvas_MouseDown;
                 Canvas.MouseUp -= Canvas_MouseUp;
                 Canvas.MouseMove -= Canvas_MouseMove;
-                pixelColors = Filters.Filter.FilterColors(pixelColors, M, (from float val in M select val).Sum(), (float)numericUpDownShift.Value);
+                pixelColors = Filters.Filter.FilterColors(pixelColors, M, D, (float)numericUpDownShift.Value);
             }
             else if (radioButtonBrush.Checked)
             {
@@ -153,7 +155,7 @@ namespace ImageFiltering
                 Canvas.MouseDown += Canvas_MouseDown;
                 Canvas.MouseUp += Canvas_MouseUp;
                 Canvas.MouseMove += Canvas_MouseMove;
-            }//Canvas.MouseCaptureChanged += Canvas_MouseCaptureChanged;
+            }
             Canvas.Image = MatrixToBitmap();
             LoadColorHistograms();
         }
@@ -191,13 +193,10 @@ namespace ImageFiltering
             mouseDown = true;
             OGColors = pixelColors;
         }
-        private int x = 0;
-        private int y = 0;
+        private int x = -1;
+        private int y = -1;
         private void Canvas_MouseMove(object? sender, MouseEventArgs e)
         {
-            //apply filter
-            //x = Cursor.Position.X; 
-            //y = Cursor.Position.Y;
             x = e.X;
             y = e.Y;
 
@@ -207,18 +206,16 @@ namespace ImageFiltering
         {
             if (radioButtonBrush.Checked)
             {
-                //Pen skyBluePen = new Pen(Brushes.DeepSkyBlue);
                 using (Pen p = new(Brushes.Black))
                 {
-                    e.Graphics.DrawEllipse(p, x - brushsize / 2, y - brushsize / 2, brushsize, brushsize);
+                    if(x >= 0 && y >= 0) e.Graphics.DrawEllipse(p, x - brushsize / 2, y - brushsize / 2, brushsize, brushsize);
                     if (mouseDown)
                     {
-                        pixelColors = Filters.Filter.FilterColors(pixelColors, OGColors, M, (from float val in M select val).Sum(), (float)numericUpDownShift.Value, x, y, brushsize / 2, colored); //TODO: remove this sum
+                        pixelColors = Filters.Filter.FilterColors(pixelColors, OGColors, M, D, (float)numericUpDownShift.Value, x, y, brushsize / 2, colored); //TODO: remove this sum
                         Canvas.Image = MatrixToBitmap();
                     }
                 }
             }
-
         }
 
         private void Canvas_MouseUp(object? sender, MouseEventArgs e)

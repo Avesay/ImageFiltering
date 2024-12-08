@@ -17,37 +17,27 @@ namespace ImageFiltering.Filters
             Color[,] outPixels = new Color[width, height];
             Parallel.For(0, width, x =>
             {
-                for(int y = 0; y < height; ++y)
+                for (int y = 0; y < height; ++y)
                 {
                     float R = 0, G = 0, B = 0;
-                    for(int i = 0; i < 3; i++)
+                    for (int i = 0; i < 3; i++)
                     {
-                        for(int j = 0; j < 3; j++)
+                        for (int j = 0; j < 3; j++)
                         {
                             int idx = x + i - 1;
                             int idy = y + j - 1;
                             if (idx < 0) idx++;
                             else if (idx >= width) idx--;
-                            if(idy < 0) idy++;
-                            else if(idy >= height) idy--;
-                            //if(x + i - 1 >= 0 && y + j - 1 >= 0 && x + i - 1 < width && y + j - 1 < height)
-                            //{
-                                R += M[i, j] * pixels[idx, idy].R;
-                                G += M[i, j] * pixels[idx, idy].G;
-                                B += M[i, j] * pixels[idx, idy].B;
-                            //}
+                            if (idy < 0) idy++;
+                            else if (idy >= height) idy--;
+                            R += M[i, j] * pixels[idx, idy].R;
+                            G += M[i, j] * pixels[idx, idy].G;
+                            B += M[i, j] * pixels[idx, idy].B;
                         }
                     }
-                    outPixels[x, y] = Color.FromArgb((int)Math.Clamp(R/D + offset, 0, 255), (int)Math.Clamp(G / D + offset,0 , 255), (int)Math.Clamp(B / D + offset, 0 , 255));
+                    outPixels[x, y] = Color.FromArgb((int)Math.Clamp(R / D + offset, 0, 255), (int)Math.Clamp(G / D + offset, 0, 255), (int)Math.Clamp(B / D + offset, 0, 255));
                 }
             });
-            /*for(int x = 0;  x < width; x++)
-            {
-                for(int y = 0; y < height; y++)
-                {
-                    
-                }
-            }*/
             return outPixels;
         }
         public static Color[,]? FilterColors(Color[,]? currpixels, Color[,]? pixels, float[,] M, float D, float offset, int xCenter, int yCenter, int r, bool[,] colored)
@@ -57,14 +47,13 @@ namespace ImageFiltering.Filters
             int width = pixels.GetLength(0);
             int height = pixels.GetLength(1);
             Color[,] outPixels = (Color[,])currpixels.Clone();
-            Parallel.For(xCenter - r > 0 ? xCenter - r : 0, xCenter + r < width ? xCenter + r : width - 1, x => //TODO
+            Parallel.For(xCenter - r > 0 ? xCenter - r : 0, xCenter + r < width ? xCenter + r : width - 1, x =>
             {
-                for(int y = yCenter - r > 0 ? yCenter - r : 0; y <= yCenter + r && y < height; ++y) //TODO
+                for (int y = yCenter - r > 0 ? yCenter - r : 0; y <= yCenter + r && y < height; ++y)
                 {
                     float R = 0, G = 0, B = 0;
-                    if (!colored[x,y] && ((x - xCenter)*(x - xCenter) + (y - yCenter) * (y - yCenter) <= r*r))
+                    if (!colored[x, y] && ((x - xCenter) * (x - xCenter) + (y - yCenter) * (y - yCenter) <= r * r))
                     {
-                        //outPixels[x, y] = pixels[x, y];
                         for (int i = 0; i < 3; i++)
                         {
                             for (int j = 0; j < 3; j++)
@@ -75,26 +64,16 @@ namespace ImageFiltering.Filters
                                 else if (idx >= width) idx--;
                                 if (idy < 0) idy++;
                                 else if (idy >= height) idy--;
-                                //if(x + i - 1 >= 0 && y + j - 1 >= 0 && x + i - 1 < width && y + j - 1 < height)
-                                //{
                                 R += M[i, j] * pixels[idx, idy].R;
                                 G += M[i, j] * pixels[idx, idy].G;
                                 B += M[i, j] * pixels[idx, idy].B;
-                                //}
                             }
                         }
                         outPixels[x, y] = Color.FromArgb((int)Math.Clamp(R / D + offset, 0, 255), (int)Math.Clamp(G / D + offset, 0, 255), (int)Math.Clamp(B / D + offset, 0, 255));
-                        colored[x,y] = true;
+                        colored[x, y] = true;
                     }
                 }
             });
-            /*for(int x = 0;  x < width; x++)
-            {
-                for(int y = 0; y < height; y++)
-                {
-                    
-                }
-            }*/
             return outPixels;
         }
     }

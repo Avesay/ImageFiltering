@@ -38,6 +38,7 @@
             menuStrip = new MenuStrip();
             plikToolStripMenuItem = new ToolStripMenuItem();
             wybierzObrazToolStripMenuItem = new ToolStripMenuItem();
+            zapiszObrazToolStripMenuItem = new ToolStripMenuItem();
             groupBoxFilter = new GroupBox();
             checkBoxAutoDivisor = new CheckBox();
             labelDzielnik = new Label();
@@ -62,7 +63,6 @@
             buttonApply = new Button();
             ChartTable = new TableLayoutPanel();
             panel1 = new Panel();
-            zapiszObrazToolStripMenuItem = new ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)Canvas).BeginInit();
             groupBoxArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarBrushSize).BeginInit();
@@ -180,9 +180,16 @@
             // wybierzObrazToolStripMenuItem
             // 
             wybierzObrazToolStripMenuItem.Name = "wybierzObrazToolStripMenuItem";
-            wybierzObrazToolStripMenuItem.Size = new Size(224, 26);
+            wybierzObrazToolStripMenuItem.Size = new Size(188, 26);
             wybierzObrazToolStripMenuItem.Text = "Wybierz obraz";
             wybierzObrazToolStripMenuItem.Click += plikToolStripMenuItem_Click;
+            // 
+            // zapiszObrazToolStripMenuItem
+            // 
+            zapiszObrazToolStripMenuItem.Name = "zapiszObrazToolStripMenuItem";
+            zapiszObrazToolStripMenuItem.Size = new Size(188, 26);
+            zapiszObrazToolStripMenuItem.Text = "Zapisz Obraz";
+            zapiszObrazToolStripMenuItem.Click += zapiszObrazToolStripMenuItem_Click;
             // 
             // groupBoxFilter
             // 
@@ -269,6 +276,7 @@
             numericUpDown22.DecimalPlaces = 4;
             numericUpDown22.Enabled = false;
             numericUpDown22.Location = new Point(180, 272);
+            numericUpDown22.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             numericUpDown22.Name = "numericUpDown22";
             numericUpDown22.Size = new Size(81, 27);
             numericUpDown22.TabIndex = 13;
@@ -279,6 +287,7 @@
             numericUpDown21.DecimalPlaces = 4;
             numericUpDown21.Enabled = false;
             numericUpDown21.Location = new Point(93, 272);
+            numericUpDown21.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             numericUpDown21.Name = "numericUpDown21";
             numericUpDown21.Size = new Size(81, 27);
             numericUpDown21.TabIndex = 12;
@@ -289,6 +298,7 @@
             numericUpDown20.DecimalPlaces = 4;
             numericUpDown20.Enabled = false;
             numericUpDown20.Location = new Point(6, 272);
+            numericUpDown20.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             numericUpDown20.Name = "numericUpDown20";
             numericUpDown20.Size = new Size(81, 27);
             numericUpDown20.TabIndex = 11;
@@ -299,6 +309,7 @@
             numericUpDown12.DecimalPlaces = 4;
             numericUpDown12.Enabled = false;
             numericUpDown12.Location = new Point(180, 239);
+            numericUpDown12.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             numericUpDown12.Name = "numericUpDown12";
             numericUpDown12.Size = new Size(81, 27);
             numericUpDown12.TabIndex = 10;
@@ -309,6 +320,7 @@
             numericUpDown11.DecimalPlaces = 4;
             numericUpDown11.Enabled = false;
             numericUpDown11.Location = new Point(93, 239);
+            numericUpDown11.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             numericUpDown11.Name = "numericUpDown11";
             numericUpDown11.Size = new Size(81, 27);
             numericUpDown11.TabIndex = 9;
@@ -319,6 +331,7 @@
             numericUpDown10.DecimalPlaces = 4;
             numericUpDown10.Enabled = false;
             numericUpDown10.Location = new Point(6, 239);
+            numericUpDown10.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             numericUpDown10.Name = "numericUpDown10";
             numericUpDown10.Size = new Size(81, 27);
             numericUpDown10.TabIndex = 8;
@@ -329,6 +342,7 @@
             numericUpDown02.DecimalPlaces = 4;
             numericUpDown02.Enabled = false;
             numericUpDown02.Location = new Point(180, 206);
+            numericUpDown02.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             numericUpDown02.Name = "numericUpDown02";
             numericUpDown02.Size = new Size(81, 27);
             numericUpDown02.TabIndex = 7;
@@ -339,6 +353,7 @@
             numericUpDown01.DecimalPlaces = 4;
             numericUpDown01.Enabled = false;
             numericUpDown01.Location = new Point(93, 206);
+            numericUpDown01.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             numericUpDown01.Name = "numericUpDown01";
             numericUpDown01.Size = new Size(81, 27);
             numericUpDown01.TabIndex = 6;
@@ -349,6 +364,7 @@
             numericUpDown00.DecimalPlaces = 4;
             numericUpDown00.Enabled = false;
             numericUpDown00.Location = new Point(6, 206);
+            numericUpDown00.Minimum = new decimal(new int[] { 100, 0, 0, int.MinValue });
             numericUpDown00.Name = "numericUpDown00";
             numericUpDown00.Size = new Size(81, 27);
             numericUpDown00.TabIndex = 4;
@@ -456,13 +472,6 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(694, 648);
             panel1.TabIndex = 17;
-            // 
-            // zapiszObrazToolStripMenuItem
-            // 
-            zapiszObrazToolStripMenuItem.Name = "zapiszObrazToolStripMenuItem";
-            zapiszObrazToolStripMenuItem.Size = new Size(224, 26);
-            zapiszObrazToolStripMenuItem.Text = "Zapisz Obraz";
-            zapiszObrazToolStripMenuItem.Click += zapiszObrazToolStripMenuItem_Click;
             // 
             // Form1
             // 
