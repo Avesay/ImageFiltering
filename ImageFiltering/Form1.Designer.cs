@@ -31,10 +31,10 @@
             Canvas = new PictureBox();
             groupBoxArea = new GroupBox();
             BrushSizeVal = new Label();
-            buttonClear = new Button();
             trackBarBrushSize = new TrackBar();
             radioButtonBrush = new RadioButton();
             radioButtonWholePicture = new RadioButton();
+            buttonClear = new Button();
             menuStrip = new MenuStrip();
             plikToolStripMenuItem = new ToolStripMenuItem();
             wybierzObrazToolStripMenuItem = new ToolStripMenuItem();
@@ -63,6 +63,7 @@
             buttonApply = new Button();
             ChartTable = new TableLayoutPanel();
             panel1 = new Panel();
+            buttonGray = new Button();
             ((System.ComponentModel.ISupportInitialize)Canvas).BeginInit();
             groupBoxArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)trackBarBrushSize).BeginInit();
@@ -97,13 +98,12 @@
             // 
             groupBoxArea.Anchor = AnchorStyles.Top | AnchorStyles.Right;
             groupBoxArea.Controls.Add(BrushSizeVal);
-            groupBoxArea.Controls.Add(buttonClear);
             groupBoxArea.Controls.Add(trackBarBrushSize);
             groupBoxArea.Controls.Add(radioButtonBrush);
             groupBoxArea.Controls.Add(radioButtonWholePicture);
             groupBoxArea.Location = new Point(977, 31);
             groupBoxArea.Name = "groupBoxArea";
-            groupBoxArea.Size = new Size(276, 185);
+            groupBoxArea.Size = new Size(276, 145);
             groupBoxArea.TabIndex = 1;
             groupBoxArea.TabStop = false;
             groupBoxArea.Text = "Obszar zastosowania filtra";
@@ -117,20 +117,11 @@
             BrushSizeVal.TabIndex = 4;
             BrushSizeVal.Text = "1";
             // 
-            // buttonClear
-            // 
-            buttonClear.Location = new Point(149, 145);
-            buttonClear.Name = "buttonClear";
-            buttonClear.Size = new Size(112, 29);
-            buttonClear.TabIndex = 2;
-            buttonClear.Text = "Wyczyść";
-            buttonClear.UseVisualStyleBackColor = true;
-            buttonClear.Click += buttonClear_Click;
-            // 
             // trackBarBrushSize
             // 
             trackBarBrushSize.Location = new Point(6, 83);
             trackBarBrushSize.Maximum = 100;
+            trackBarBrushSize.Minimum = 5;
             trackBarBrushSize.Name = "trackBarBrushSize";
             trackBarBrushSize.Size = new Size(228, 56);
             trackBarBrushSize.TabIndex = 2;
@@ -159,6 +150,17 @@
             radioButtonWholePicture.TabStop = true;
             radioButtonWholePicture.Text = "Cały obraz";
             radioButtonWholePicture.UseVisualStyleBackColor = true;
+            // 
+            // buttonClear
+            // 
+            buttonClear.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonClear.Location = new Point(977, 673);
+            buttonClear.Name = "buttonClear";
+            buttonClear.Size = new Size(276, 29);
+            buttonClear.TabIndex = 2;
+            buttonClear.Text = "Wyczyść wszystko";
+            buttonClear.UseVisualStyleBackColor = true;
+            buttonClear.Click += buttonClear_Click;
             // 
             // menuStrip
             // 
@@ -214,7 +216,7 @@
             groupBoxFilter.Controls.Add(radioButtonSharpen);
             groupBoxFilter.Controls.Add(radioButtonBlur);
             groupBoxFilter.Controls.Add(radioButtonIdentity);
-            groupBoxFilter.Location = new Point(977, 222);
+            groupBoxFilter.Location = new Point(977, 182);
             groupBoxFilter.Name = "groupBoxFilter";
             groupBoxFilter.Size = new Size(276, 415);
             groupBoxFilter.TabIndex = 3;
@@ -440,8 +442,8 @@
             // 
             // buttonApply
             // 
-            buttonApply.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            buttonApply.Location = new Point(977, 643);
+            buttonApply.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonApply.Location = new Point(977, 603);
             buttonApply.Name = "buttonApply";
             buttonApply.Size = new Size(276, 29);
             buttonApply.TabIndex = 15;
@@ -470,14 +472,27 @@
             panel1.Controls.Add(Canvas);
             panel1.Location = new Point(0, 31);
             panel1.Name = "panel1";
-            panel1.Size = new Size(694, 648);
+            panel1.Size = new Size(694, 674);
             panel1.TabIndex = 17;
+            // 
+            // buttonGray
+            // 
+            buttonGray.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            buttonGray.Location = new Point(977, 638);
+            buttonGray.Name = "buttonGray";
+            buttonGray.Size = new Size(276, 29);
+            buttonGray.TabIndex = 18;
+            buttonGray.Text = "Konwersja do szarości";
+            buttonGray.UseVisualStyleBackColor = true;
+            buttonGray.Click += buttonGray_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1261, 679);
+            ClientSize = new Size(1261, 705);
+            Controls.Add(buttonGray);
+            Controls.Add(buttonClear);
             Controls.Add(panel1);
             Controls.Add(ChartTable);
             Controls.Add(buttonApply);
@@ -549,5 +564,6 @@
         private Panel panel1;
         private ToolStripMenuItem wybierzObrazToolStripMenuItem;
         private ToolStripMenuItem zapiszObrazToolStripMenuItem;
+        private Button buttonGray;
     }
 }

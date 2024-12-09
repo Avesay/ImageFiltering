@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ImageFiltering.Filters
+﻿namespace ImageFiltering.Filters
 {
     internal static class Filter
     {
@@ -40,9 +34,9 @@ namespace ImageFiltering.Filters
             });
             return outPixels;
         }
-        public static Color[,]? FilterColors(Color[,]? currpixels, Color[,]? pixels, float[,] M, float D, float offset, int xCenter, int yCenter, int r, bool[,] colored)
+        public static Color[,]? FilterColors(Color[,]? currpixels, Color[,]? pixels, float[,] M, float D, float offset, int xCenter, int yCenter, int r, bool[,]? colored)
         {
-            if (pixels is null) return null;
+            if (pixels is null || currpixels is null || colored is null) return null;
             if (D == 0) D = 1;
             int width = pixels.GetLength(0);
             int height = pixels.GetLength(1);

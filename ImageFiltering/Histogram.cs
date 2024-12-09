@@ -1,10 +1,4 @@
-﻿using FastBitmapLib;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms.DataVisualization.Charting;
+﻿using System.Windows.Forms.DataVisualization.Charting;
 
 namespace ImageFiltering
 {
@@ -15,17 +9,15 @@ namespace ImageFiltering
         {
             pixelColors = colors;
         }
-        
+
         private Chart GetBasicHistogram()
         {
-            Chart chart = new();
-            chart.Dock = DockStyle.Fill;
+            Chart chart = new()
+            {
+                Dock = DockStyle.Fill
+            };
             chart.ChartAreas.Add(new ChartArea());
             chart.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
-            /*chart.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
-            chart.ChartAreas[0].AxisY.Interval = 300;
-            chart.ChartAreas[0].AxisX.Interval = 255;
-            chart.ChartAreas[0].AxisX2.Interval = 51;*/
             chart.ChartAreas[0].AxisY2.Enabled = AxisEnabled.True;
             chart.ChartAreas[0].AxisX2.Enabled = AxisEnabled.True;
             chart.ChartAreas[0].AxisX.LabelStyle.Enabled = false;
@@ -55,7 +47,7 @@ namespace ImageFiltering
             Chart ChartR = GetBasicHistogram();
             int[] counts = new int[256];
             for (int i = 0; i < pixelColors.GetLength(0); i++)
-            { 
+            {
                 for (int j = 0; j < pixelColors.GetLength(1); j++)
                 {
                     counts[pixelColors[i, j].R]++;
@@ -77,7 +69,7 @@ namespace ImageFiltering
                 }
             }
             Series s = ValuesToSeries(counts);
-            s.Color = Color.FromArgb(0,255,0);
+            s.Color = Color.FromArgb(0, 255, 0);
             ChartG.Series.Add(s);
             ChartG.Series["Series 1"]["PixelPointWidth"] = "1";
             return ChartG;
